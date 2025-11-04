@@ -1,18 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'jacoco'
 ext {
-    PUBLISH_GROUP_ID = 'io.antmedia'
-    PUBLISH_VERSION = '3.0.0-SNAPSHOT'
+    PUBLISH_GROUP_ID = 'io.mrammia.antmedia'
+    PUBLISH_VERSION = '0.0.1'
     PUBLISH_ARTIFACT_ID = 'webrtc-android-framework'
 }
 apply from: 'publish-remote.gradle'
-
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdkVersion 26
+        targetSdkVersion 35
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,10 +53,10 @@ tasks.withType(Test) {
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest','createDebugCoverageReport']) {
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
+    //    reports {
+//        xml.enabled = true
+//        html.enabled = true
+//    }
 
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
     def debugTree = fileTree(dir: "$project.buildDir/intermediates/javac/debug", excludes: fileFilter)
